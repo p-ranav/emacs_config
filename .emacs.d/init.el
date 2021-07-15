@@ -49,6 +49,9 @@
 (setf gc-cons-threshold 100000000)
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ; start full screen
 
+;; Show line numbers always
+(global-display-line-numbers-mode 1)
+
 ;; Based on my anecdotal observations, this reduces the amount of display flicker during Emacs startup.
 (setq redisplay-dont-pause t)
 
