@@ -237,6 +237,12 @@
                 (kill-buffer (current-buffer))
                 (delete-window)))))
 
+;; Basic ido configuration
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+;; Recentf configuration
 (require 'recentf)
 
 ;; get rid of `find-file-read-only' and replace it with something
@@ -255,3 +261,4 @@
   (if (find-file (ido-completing-read "Find recent file: " recentf-list))
       (message "Opening file...")
     (message "Aborting")))
+
