@@ -30,6 +30,7 @@
                       auto-complete ; Auto-complete plugin for autocompletion prompts
                       ido ; Interactively DO things
                       recentf ; Find recently opened files
+                      smex ; Smex is a M-x enhancement for Emacs
                       super-save ; Auto-saves your buffers, when certain events happen - e.g. you switch between buffers
                       yasnippet)) ; Insert snippets using tab.
 
@@ -260,3 +261,9 @@
 
 ;; Switch off the built-in auto-save-mode
 (setq auto-save-default nil)
+
+;; Smex configuration
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
