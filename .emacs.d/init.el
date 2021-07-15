@@ -30,6 +30,7 @@
                       auto-complete ; Auto-complete plugin for autocompletion prompts
                       ido ; Interactively DO things
                       recentf ; Find recently opened files
+                      super-save ; Auto-saves your buffers, when certain events happen - e.g. you switch between buffers
                       yasnippet)) ; Insert snippets using tab.
 
 ;; Ensure that every package above is installed. This is helpful when setting up Emacs on a new machine.
@@ -41,7 +42,6 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/autopair")
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
-
 
 ;;
 ;; General settings
@@ -141,14 +141,6 @@
                 (untabify (point-min) (point-max)))
             nil))
 
-;; Save buffers whenever they lose focus.
-;; This obviates the need to hit the Save key thousands of times a day. Inspired by http://goo.gl/2z0g5O.
-(dolist (f '(windmove-up windmove-right windmove-down windmove-left))
-  (advice-add f :before (lambda (&optional args) (util/save-buffer-if-dirty))))
-
-;; When switching focus out of the Emacs app, save the buffer.
-(add-hook 'focus-out-hook 'util/save-buffer-if-dirty)
-
 ;;
 ;; Incremental search (isearch)
 ;;
@@ -227,15 +219,13 @@
               (reusable-frames . visible)
               (window-height   . 0.33)))
 
-;; Open flycheck buffer automatically when an error is detected
+;; Show flycheck buffer automatically when an error is detected
 (add-hook 'flycheck-after-syntax-check-hook
           (lambda  ()
             (if flycheck-current-errors
                 (flycheck-list-errors)
               (when (get-buffer "*Flycheck errors*")
-                (switch-to-buffer "*Flycheck errors*")
-                (kill-buffer (current-buffer))
-                (delete-window)))))
+                ))))
 
 ;; Basic ido configuration
 (setq ido-enable-flex-matching t)
@@ -262,3 +252,11 @@
       (message "Opening file...")
     (message "Aborting")))
 
+;; Super-save configuration
+(super-save-mode +1)
+
+;; Enable the additional feature of auto-saving buffers when Emacs is idle
+(setq super-save-auto-save-when-idle t)
+
+;; Switch off the built-in auto-save-mode
+(setq auto-save-default nil)
