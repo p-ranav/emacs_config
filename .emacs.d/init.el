@@ -25,9 +25,11 @@
                       org ; For outlining. This is bundled with Emacs, but I'm using the latest version.
                       powerline ; Improve the appearance & density of the Emacs status bar.
                       rainbow-delimiters ; Highlight parentheses in rainbow colors.
-		      flycheck ; On-the-fly syntax checker
-		      clang-format+ ; Clang format on save for C++
-		      auto-complete ; Auto-complete plugin for autocompletion prompts
+                      flycheck ; On-the-fly syntax checker
+                      clang-format+ ; Clang format on save for C++
+                      auto-complete ; Auto-complete plugin for autocompletion prompts
+                      ido ; Interactively DO things
+                      recentf ; Find recently opened files
                       yasnippet)) ; Insert snippets using tab.
 
 ;; Ensure that every package above is installed. This is helpful when setting up Emacs on a new machine.
@@ -231,3 +233,22 @@
                 (switch-to-buffer "*Flycheck errors*")
                 (kill-buffer (current-buffer))
                 (delete-window)))))
+
+(require 'recentf)
+
+;; get rid of `find-file-read-only' and replace it with something
+;; more useful.
+(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
+
+;; enable recent files mode.
+(recentf-mode t)
+
+; 50 files ought to be enough.
+(setq recentf-max-saved-items 50)
+
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
+  (interactive)
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
