@@ -39,8 +39,10 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Add plugins directory to load path
+(add-to-list 'load-path "~/.emacs.d/plugins")
+
 ;; Enable autopair
-(add-to-list 'load-path "~/.emacs.d/plugins/autopair")
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
 
@@ -267,3 +269,33 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+;; Ace-jump mode configuration
+;;
+;; ace jump mode major function
+;; 
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; 
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+
+;; Find file in project
+
+(require 'find-file-in-project)
+(setq ffip-prefer-ido-mode t)
+(define-key global-map "\C-f" 'find-file-in-project)
