@@ -11,5 +11,4 @@
 
 ## Writing C++
 
-https://user-images.githubusercontent.com/8450091/125963449-97060800-64bb-45c8-b4d3-7cf3dfcb402b.mp4
-
+![Demo](https://user-images.githubusercontent.com/8450091/125965927-6b0ecba4-e943-4949-9669-dd950fce654f.gif)
