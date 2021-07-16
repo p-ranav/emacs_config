@@ -298,4 +298,4 @@
 
 (require 'find-file-in-project)
 (setq ffip-prefer-ido-mode t)
-(define-key global-map "\C-f" 'find-file-in-project)
+(define-key global-map "\C-xf" 'find-file-in-project)
