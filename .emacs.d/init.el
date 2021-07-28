@@ -210,25 +210,25 @@
 ;; Theme Configuration
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/") 
 
-;; Enable flycheck syntax checking always
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; ;; Enable flycheck syntax checking always
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; Change flycheck buffer appearance
-(add-to-list 'display-buffer-alist
-             `(,(rx bos "*Flycheck errors*" eos)
-              (display-buffer-reuse-window
-               display-buffer-in-side-window)
-              (side            . bottom)
-              (reusable-frames . visible)
-              (window-height   . 0.33)))
+;; ;; Change flycheck buffer appearance
+;; (add-to-list 'display-buffer-alist
+;;              `(,(rx bos "*Flycheck errors*" eos)
+;;               (display-buffer-reuse-window
+;;                display-buffer-in-side-window)
+;;               (side            . bottom)
+;;               (reusable-frames . visible)
+;;               (window-height   . 0.33)))
 
-;; Show flycheck buffer automatically when an error is detected
-(add-hook 'flycheck-after-syntax-check-hook
-          (lambda  ()
-            (if flycheck-current-errors
-                (flycheck-list-errors)
-              (when (get-buffer "*Flycheck errors*")
-                ))))
+;; ;; Show flycheck buffer automatically when an error is detected
+;; (add-hook 'flycheck-after-syntax-check-hook
+;;           (lambda  ()
+;;             (if flycheck-current-errors
+;;                 (flycheck-list-errors)
+;;               (when (get-buffer "*Flycheck errors*")
+;;                 ))))
 
 ;; Basic ido configuration
 (setq ido-enable-flex-matching t)
